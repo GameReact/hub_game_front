@@ -1,9 +1,12 @@
-const Home: React.FunctionComponent = () => {
-	return (
-		<div>
-			Home
-		</div>
-	)
-}
+import ResponsiveAppBar from "../../components/Navbar";
 
-export default Home
+const Home: React.FunctionComponent = () => {
+  return (
+    <>
+      <ResponsiveAppBar />
+      <div>Home</div>
+    </>
+  );
+};
+
+export default Home;
