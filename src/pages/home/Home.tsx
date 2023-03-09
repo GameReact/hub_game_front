@@ -1,3 +1,4 @@
+import Footer from "../../components/Footer";
 import ResponsiveAppBar from "../../components/Navbar";
 
 const Home: React.FunctionComponent = () => {
@@ -5,6 +6,7 @@ const Home: React.FunctionComponent = () => {
     <>
       <ResponsiveAppBar />
       <div>Home</div>
+      <Footer />
     </>
   );
 };
