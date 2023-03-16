@@ -1,11 +1,28 @@
+import CustomGrid from "../../components/CustomGrid";
 import Footer from "../../components/Footer";
-import ResponsiveAppBar from "../../components/Navbar";
+import Header from "../../components/Header";
 
 const Home: React.FunctionComponent = () => {
   return (
     <>
-      <ResponsiveAppBar />
-      <div>Home</div>
+      <Header />
+      <div>Accueil Game Hub</div>
+      <div>
+        <p>
+          Bienvenue sur notre site internet ! Nous sommes une équipe passionnée
+          de jeux et de divertissement. Nous avons créé chaque jeu que vous
+          trouverez sur notre site à la main, avec soin et attention aux
+          détails. Notre objectif est de vous offrir des jeux uniques et
+          amusants que vous ne trouverez nulle part ailleurs. Chaque jeu a été
+          conçu pour offrir une expérience de jeu captivante et stimulante, que
+          vous pourrez apprécier seul ou en compagnie d'amis et de famille. Nous
+          sommes fiers de notre travail et nous espérons que vous trouverez un
+          jeu qui vous plaira parmi notre sélection. N'hésitez pas à nous
+          contacter si vous avez des questions ou des commentaires sur notre
+          site ou nos jeux. Merci de visiter notre site et amusez-vous bien !
+        </p>
+      </div>
+      <CustomGrid />
       <Footer />
     </>
   );
