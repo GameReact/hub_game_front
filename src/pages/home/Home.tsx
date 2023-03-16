@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import CustomGrid from "../../components/CustomGrid";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -6,7 +7,7 @@ const Home: React.FunctionComponent = () => {
   return (
     <>
       <Header />
-      <div>Accueil Game Hub</div>
+      <Typography variant="h1">Accueil Game Hub</Typography>
       <div>
         <p>
           Bienvenue sur notre site internet ! Nous sommes une équipe passionnée

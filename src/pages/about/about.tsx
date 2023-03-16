@@ -50,35 +50,35 @@ const About: React.FunctionComponent = () => {
       >
         <ListItem>
           <ListItemDecorator sx={{ alignSelf: "flex-start" }}>
-            <Avatar size="sm" src="/static/images/avatar/1.jpg" />
+            <Avatar size="sm" {...stringAvatar("Léo A")} />
           </ListItemDecorator>
           Léo A
         </ListItem>
         <ListDivider inset="gutter" />
         <ListItem>
           <ListItemDecorator sx={{ alignSelf: "flex-start" }}>
-            <Avatar size="sm" src="/static/images/avatar/2.jpg" />
+            <Avatar size="sm" {...stringAvatar("Bastien A")} />
           </ListItemDecorator>
           Bastien
         </ListItem>
         <ListDivider inset="gutter" />
         <ListItem>
           <ListItemDecorator sx={{ alignSelf: "flex-start" }}>
-            <Avatar size="sm" src="/static/images/avatar/3.jpg" />
+            <Avatar size="sm" {...stringAvatar("Léo B")} />
           </ListItemDecorator>
           Léo B
         </ListItem>
         <ListDivider inset="gutter" />
         <ListItem>
           <ListItemDecorator sx={{ alignSelf: "flex-start" }}>
-            <Avatar size="sm" src="/static/images/avatar/3.jpg" />
+            <Avatar size="sm" {...stringAvatar("Reda K")} />
           </ListItemDecorator>
           Reda
         </ListItem>
         <ListDivider inset="gutter" />
         <ListItem>
           <ListItemDecorator sx={{ alignSelf: "flex-start" }}>
-            <Avatar size="sm" src="/static/images/avatar/3.jpg" />
+            <Avatar size="sm" {...stringAvatar("Mathieu J")} />
           </ListItemDecorator>
           Mathieu
         </ListItem>
@@ -87,5 +87,34 @@ const About: React.FunctionComponent = () => {
     </div>
   );
 };
+
+function stringToColor(string: string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = "#";
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name: string) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+  };
+}
 
 export default About;
