@@ -5,49 +5,13 @@ import List from "@mui/joy/List";
 import ListDivider from "@mui/joy/ListDivider";
 import ListItem from "@mui/joy/ListItem";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
-
-// const About: React.FunctionComponent = () => {
-//   return (
-//     <List
-//       orientation="horizontal"
-//       variant="outlined"
-//       sx={{
-//         bgcolor: "background.body",
-//         borderRadius: "sm",
-//         boxShadow: "sm",
-//         flexGrow: 0,
-//         mx: "auto",
-//         "--List-decoratorSize": "48px",
-//         "--ListItem-paddingY": "1rem",
-//       }}
-//     >
-//       <ListItem>
-//         <ListItemDecorator sx={{ alignSelf: "flex-start" }}>
-//           <Avatar size="sm" src="/static/images/avatar/1.jpg" />
-//         </ListItemDecorator>
-//         Mabel Boyle
-//       </ListItem>
-//       <ListDivider inset="gutter" />
-//       <ListItem>
-//         <ListItemDecorator sx={{ alignSelf: "flex-start" }}>
-//           <Avatar size="sm" src="/static/images/avatar/2.jpg" />
-//         </ListItemDecorator>
-//         Boyd Burt
-//       </ListItem>
-//       <ListDivider inset="gutter" />
-//       <ListItem>
-//         <ListItemDecorator sx={{ alignSelf: "flex-start" }}>
-//           <Avatar size="sm" src="/static/images/avatar/3.jpg" />
-//         </ListItemDecorator>
-//         Adam Tris
-//       </ListItem>
-//     </List>
-//   );
-// };
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 
 const About: React.FunctionComponent = () => {
   return (
     <div>
+      <Header />
       <Typography variant="h1">À propos de Game Hub</Typography>
       <Typography variant="body1">
         Nous sommes une équipe de 5 développeurs passionnés par la création de
@@ -119,6 +83,7 @@ const About: React.FunctionComponent = () => {
           Mathieu
         </ListItem>
       </List>
+      <Footer />
     </div>
   );
 };
