@@ -86,7 +86,7 @@ function AuthPage() {
 				open={values.openSnackbar}
 			></SnackbarAlert>
 			<Container maxWidth="lg" ref={containerRef}>
-				<Box sx={{ my: 3, textAlign: "center" }}>
+				<Box component="div" sx={{ my: 3, textAlign: "center" }}>
 					<AdbIcon
 						sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
 					/>

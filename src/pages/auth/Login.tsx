@@ -185,7 +185,7 @@ const Login: React.FC<Params> = ({ openSnackbar }) => {
 
   return (
     <form>
-      <Box
+      <Box component="div"
         sx={{
           margin: "auto",
           width: 500,
