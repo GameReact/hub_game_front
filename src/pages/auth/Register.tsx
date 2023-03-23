@@ -110,7 +110,7 @@ const Register: React.FC<Params> = ({
 
   return (
     <form>
-      <Box
+      <Box component="div"
         sx={{
           margin: "auto",
           width: 500,

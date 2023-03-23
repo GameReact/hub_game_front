@@ -16,7 +16,7 @@ const CustomGrid = () => {
   ];
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box component="div" sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         {games.map((game, index) => (
           <Grid component="div" xs={6} key={index}>

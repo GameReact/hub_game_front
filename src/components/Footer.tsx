@@ -5,7 +5,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 
 export const Footer: FC = (): ReactElement => {
   return (
-    <Box
+    <Box component="div"
       sx={{
         width: "100%",
         height: "auto",
