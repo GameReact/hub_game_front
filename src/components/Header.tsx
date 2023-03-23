@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const pages = ["Statistics", "About"];
+const pages = ["Stats", "About"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Header() {
