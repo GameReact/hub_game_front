@@ -25,8 +25,8 @@ const CustomGrid = () => {
                 src={game.imageUrl}
                 alt={game.name}
                 style={{
-                  maxWidth: "250px",
-                  maxHeight: "250px",
+                  maxWidth: "350px",
+                  maxHeight: "350px",
                   width: "100%",
                   height: "100%",
                 }}
