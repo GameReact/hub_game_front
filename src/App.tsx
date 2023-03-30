@@ -9,6 +9,30 @@ import Stats from "./pages/stats/Stats";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContextProvider";
 
+import TicTacToe from "./pages/tic_tac_toe/TicTacToe";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/auth",
+    element: <Authpage />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/stats",
+    element: <Stats />,
+  },
+  {
+    path: "games/tictactoe",
+    element: <TicTacToe />
+  }
+]);
 
 function App() {
   const { state } = useContext(UserContext);
@@ -18,7 +42,8 @@ function App() {
       path: "/",
       element: <Authpage />,
     }
-  ]);  if(state.token){
+  ]);
+  if(state.token){
     router = createBrowserRouter([
       {
         path: "/",
@@ -36,6 +61,10 @@ function App() {
         path: "/stats",
         element: <Stats />,
       },
+      {
+        path: "/Morpion",
+        element: <TicTacToe />
+      }
     ]);
   } else {
 
@@ -43,7 +72,7 @@ function App() {
 
   console.log(router)
   return (
-    <div className="App">
+    <div className="app">
       <RouterProvider router={router} />
     </div>
   );
