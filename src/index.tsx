@@ -2,9 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
-import { store, persistor } from "./store/store";
-import { PersistGate } from "redux-persist/integration/react";
 import UserContextProvider from './context/UserContextProvider';
 
 const root = ReactDOM.createRoot(

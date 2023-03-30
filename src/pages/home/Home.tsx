@@ -2,15 +2,21 @@ import { Typography } from "@mui/material";
 import CustomGrid from "../../components/CustomGrid";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContextProvider";
 
 const Home: React.FunctionComponent = () => {
+  const { state } = useContext(UserContext);
+
+  console.log(state)
+
   return (
     <>
       <Header />
       <Typography variant="h1">Accueil Game Hub</Typography>
       <div>
         <p>
-          Bienvenue sur notre site internet ! Nous sommes une équipe passionnée
+          {state.firstname}, bienvenue sur notre site internet ! Nous sommes une équipe passionnée
           de jeux et de divertissement. Nous avons créé chaque jeu que vous
           trouverez sur notre site à la main, avec soin et attention aux
           détails. Notre objectif est de vous offrir des jeux uniques et
