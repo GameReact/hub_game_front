@@ -1,19 +1,18 @@
 import { Container, Typography } from "@mui/material";
-import CustomGrid from "../../components/CustomGrid";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
-import faker from "faker";
 import "chart.js/auto";
+import faker from "faker";
+import { Bar, Line } from "react-chartjs-2";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 
 ChartJS.register(
   CategoryScale,

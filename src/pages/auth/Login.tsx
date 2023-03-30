@@ -32,7 +32,7 @@ const Login: React.FC<Params> = ({ openSnackbar }) => {
   const { state, dispatch } = useContext(UserContext);
 
   const updateUser = (newUserState: UserSliceState) => {
-    dispatch({ type: 'setUser', payload: newUserState });
+    dispatch({ type: "setUser", payload: newUserState });
   };
 
   // const dispatch = useDispatch();
@@ -100,14 +100,15 @@ const Login: React.FC<Params> = ({ openSnackbar }) => {
     })
       .then((response) => {
         const config = jwt_decode(token) as JwtPayload;
-          const newUserState = {            token: token,
-            tokenPayload: config,
-            id: response!.data.content[0].id,
-            email: response!.data.content[0].email,
-            firstname: response!.data.content[0].firstname,
-            lastname: response!.data.content[0].lastname,
-          };
-          updateUser(newUserState);
+        const newUserState = {
+          token: token,
+          tokenPayload: config,
+          id: response!.data.content[0].id,
+          email: response!.data.content[0].email,
+          firstname: response!.data.content[0].firstname,
+          lastname: response!.data.content[0].lastname,
+        };
+        updateUser(newUserState);
         openSnackbar("Connexion réussie !", "success");
         navigate("/");
       })
