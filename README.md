@@ -83,5 +83,4 @@ npm start
 
 ## Plugins conseillés
 
-Eslint : Linter
-Prettier : Code formater
+Le Linter Eslint et le formateur Prettier sont des outils très utiles pour assurer la qualité du code et faciliter son maintien. Ils peuvent être installés dans votre éditeur de code préféré pour vous aider à détecter les erreurs de syntaxe et de formatage et à les corriger automatiquement.
