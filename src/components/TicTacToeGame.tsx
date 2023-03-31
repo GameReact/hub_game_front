@@ -447,9 +447,9 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
                             bevelEnabled={false} bevelOffset={undefined} bevelSize={undefined}
                             bevelThickness={undefined} curveSegments={undefined}>
                         {player.valueOf() === PLAYER.PLAYER_1 ?
-                            'Joueur 1 à gagné' :
+                            'Joueur 1 a gagné' :
                             player.valueOf() === PLAYER.PLAYER_2 ?
-                                'Joueur 2 à gagné' :
+                                'Joueur 2 a gagné' :
                                 ''}
                     </Text3D>
                 </Center>
