@@ -1,9 +1,8 @@
-import {useFrame, useThree} from '@react-three/fiber'
+import {useThree} from '@react-three/fiber'
 import React, {useEffect, useState} from "react";
-// @ts-ignore
-// import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import {BoxGeometry, CylinderGeometry, Group, Mesh, MeshBasicMaterial, Vector3} from "three";
 import {Center, Text3D} from "@react-three/drei";
+import {useNavigate} from "react-router-dom";
 
 type Params = {
     color: string
@@ -30,6 +29,7 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
 
     // Use this hook to access all the state of the canvas
     const state = useThree()
+    const navigate = useNavigate()
 
     const [init, setInit] = useState<boolean>(false)
     const [player, setPLayer] = useState<PLAYER>(PLAYER.PLAYER_1)
@@ -52,16 +52,9 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
         }
     })
 
-    useFrame(() => {
-        // TODO : move the box
-        // if (boxRef && boxRef.current && boxRef.current.rotation) {
-        //     boxRef.current.rotation.y += 0.01;
-        //     boxRef.current.rotation.x += 0.01;
-        // }
-        // if (board && board.current && board.current?.rotation) {
-        //     board.current.rotation.y += 0.01
-        // }
-    });
+    // We can use this hook the move mesh
+    // useFrame(() => {
+    // });
 
     //region creation function
     /**
@@ -80,6 +73,8 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
         cylinder.position.set(x, y, z)
         // Rotation of PI/2 cause by default it's the wrong rotation for the game
         cylinder.rotateX(Math.PI / 2)
+        // Store uuid
+        playerMesh.push(cylinder.uuid)
         // Add cylinder to the scene
         state.scene.add(cylinder)
     }
@@ -142,6 +137,9 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
         if (angle) {
             winningLine.rotateZ(angle)
         }
+        // Store the uuid
+        playerMesh.push(winningLine.uuid)
+
         state.scene.add(winningLine)
     }
 
@@ -342,6 +340,10 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
 
     //endregion
 
+    function leave(): void {
+        navigate("/")
+    }
+
     return (
         <>
             <group>
@@ -445,15 +447,38 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
                             bevelEnabled={false} bevelOffset={undefined} bevelSize={undefined}
                             bevelThickness={undefined} curveSegments={undefined}>
                         {player.valueOf() === PLAYER.PLAYER_1 ?
-                            'Player 1 won ' :
+                            'Joueur 1 à gagné' :
                             player.valueOf() === PLAYER.PLAYER_2 ?
-                                'Player 2 won' :
+                                'Joueur 2 à gagné' :
                                 ''}
                     </Text3D>
                 </Center>
                 :
                 <></>
             }
+            <group>
+                <Center position={[8, 2, 0]}>
+                    <Text3D font="/font/Inter_Bold.json" size={undefined} height={undefined}
+                            bevelEnabled={false} bevelOffset={undefined} bevelSize={undefined}
+                            bevelThickness={undefined} curveSegments={undefined}
+                            onClick={leave}>
+                        Quitter
+                    </Text3D>
+                </Center>
+                {aPlayerWin ?
+                    <Center position={[8, 0, 0]}>
+                        <Text3D font="/font/Inter_Bold.json" size={undefined} height={undefined}
+                                bevelEnabled={false} bevelOffset={undefined} bevelSize={undefined}
+                                bevelThickness={undefined} curveSegments={undefined}
+                                onClick={resetGame}>
+                            Réinitialiser
+                        </Text3D>
+                    </Center>
+                    :
+                    <></>
+                }
+
+            </group>
         </>
 
     )
