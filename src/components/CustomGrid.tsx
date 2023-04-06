@@ -19,16 +19,22 @@ const CustomGrid = () => {
     <Box component="div" sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         {games.map((game, index) => (
-          <Grid component="div" xs={6} key={index}>
+          <Grid
+            component="div"
+            xs={6}
+            key={index}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <Link to={"/" + game.name}>
               <img
                 src={game.imageUrl}
                 alt={game.name}
                 style={{
-                  maxWidth: "350px",
-                  maxHeight: "350px",
-                  width: "100%",
-                  height: "100%",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "cover",
+                  height: "250px", // Ajout de la hauteur maximale
+                  width: "250px", // Ajout de la largeur maximale
                 }}
               />
               <Typography variant="h6" align="center" gutterBottom>
