@@ -11,8 +11,9 @@ const CustomGrid = () => {
     {
       name: "Distance entre des villes pays ?",
       imageUrl: preview1,
+      link: "/games/2",
     },
-    { name: "Morpion", imageUrl: preview2 },
+    { name: "Morpion", imageUrl: preview2, link: "/games/1" },
   ];
 
   return (
@@ -25,7 +26,7 @@ const CustomGrid = () => {
             key={index}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            <Link to={"/" + game.name}>
+            <Link to={game.link}>
               <img
                 src={game.imageUrl}
                 alt={game.name}

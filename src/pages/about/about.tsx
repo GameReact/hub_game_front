@@ -6,12 +6,12 @@ import ListDivider from "@mui/joy/ListDivider";
 import ListItem from "@mui/joy/ListItem";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import { HeaderAction } from "../../components/Header";
 
 const About: React.FunctionComponent = () => {
   return (
     <div>
-      <Header />
+      <HeaderAction />
       <Typography variant="h1">À propos de Game Hub</Typography>
       <Typography variant="body1">
         Nous sommes une équipe de 5 développeurs passionnés par la création de

@@ -1,16 +1,17 @@
 import { Typography } from "@mui/material";
 import CustomGrid from "../../components/CustomGrid";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContextProvider";
+import { HeaderAction } from "../../components/Header";
 
 const Home: React.FunctionComponent = () => {
   const { state: user } = useContext(UserContext);
 
   return (
     <>
-      <Header />
+      <HeaderAction />
+      {/* <Header /> */}
       <Typography variant="h1">Accueil Game Hub</Typography>
       <div>
         <p>

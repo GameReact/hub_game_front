@@ -4,12 +4,13 @@ import Home from "./pages/home/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./styles/global.css";
 import Authpage from "./pages/auth/Authpage";
-import About from "./pages/about/About";
 import Stats from "./pages/stats/Stats";
+import About from "./pages/about/About";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContextProvider";
 
 import TicTacToe from "./pages/tic_tac_toe/TicTacToe";
+import { HeaderAction } from "./components/Header";
 
 const router = createBrowserRouter([
   {
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
   },
   {
     path: "games/tictactoe",
-    element: <TicTacToe />
-  }
+    element: <TicTacToe />,
+  },
 ]);
 
 function App() {
@@ -41,9 +42,9 @@ function App() {
     {
       path: "/",
       element: <Authpage />,
-    }
+    },
   ]);
-  if(state.token){
+  if (state.token) {
     router = createBrowserRouter([
       {
         path: "/",
@@ -62,15 +63,13 @@ function App() {
         element: <Stats />,
       },
       {
-        path: "/Morpion",
-        element: <TicTacToe />
-      }
+        path: "/games/1",
+        element: <TicTacToe />,
+      },
     ]);
   } else {
-
   }
 
-  console.log(router)
   return (
     <div className="app">
       <RouterProvider router={router} />

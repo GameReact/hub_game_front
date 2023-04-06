@@ -12,7 +12,7 @@ import "chart.js/auto";
 import faker from "faker";
 import { Bar, Line } from "react-chartjs-2";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import { HeaderAction } from "../../components/Header";
 
 ChartJS.register(
   CategoryScale,
@@ -102,7 +102,7 @@ export const data2 = {
 const Stats: React.FunctionComponent = () => {
   return (
     <>
-      <Header />
+      <HeaderAction />
       <Container maxWidth="sm">
         <Typography variant="h2">Statistique Game Hub</Typography>
         <Bar options={options1} data={data1} />
