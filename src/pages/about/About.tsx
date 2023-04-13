@@ -5,8 +5,8 @@ import List from "@mui/joy/List";
 import ListDivider from "@mui/joy/ListDivider";
 import ListItem from "@mui/joy/ListItem";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
-import Footer from "../../components/Footer";
 import { HeaderAction } from "../../components/Header";
+import { Footer } from "../../components/Footer";
 
 const About: React.FunctionComponent = () => {
   return (

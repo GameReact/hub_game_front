@@ -11,7 +11,6 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
-import { MantineLogo } from "@mantine/ds";
 import { Link } from "react-router-dom";
 
 const HEADER_HEIGHT = rem(60);
@@ -37,7 +36,7 @@ const useStyles = createStyles((theme: any) => ({
   link: {
     display: "block",
     lineHeight: 1,
-    padding: `${rem(8)} ${rem(12)}`,
+    padding: `${rem(12)} ${rem(18)}`,
     borderRadius: theme.radius.sm,
     textDecoration: "none",
     fontSize: theme.fontSizes.sm,
@@ -56,23 +55,15 @@ const useStyles = createStyles((theme: any) => ({
   },
 }));
 
-interface HeaderActionProps {
-  links: {
-    link: string;
-    label: string;
-    links: { link: string; label: string }[];
-  }[];
-}
-
 export function HeaderAction() {
   const links = [
     {
       link: "/",
-      label: "Home",
+      label: "Accueil",
     },
     {
       link: "",
-      label: "Games",
+      label: "Jeux",
       links: [
         {
           link: "/games/1",
@@ -86,11 +77,11 @@ export function HeaderAction() {
     },
     {
       link: "/about",
-      label: "About",
+      label: "A propos",
     },
     {
       link: "/stats",
-      label: "Stats",
+      label: "Statistique",
     },
     {
       link: "/profil",
@@ -162,7 +153,7 @@ export function HeaderAction() {
         </Group>
         <Group className={classes.links}>{items}</Group>
         <Button radius="xl" h={30}>
-          Disconnect
+          Se déconnecter
         </Button>
       </Container>
     </Header>

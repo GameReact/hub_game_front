@@ -1,35 +1,70 @@
-// src/componetns/Footer.tsx
+import { createStyles, Container, Group, Anchor, rem } from "@mantine/core";
+import { MantineLogo } from "@mantine/ds";
 
-import React, { FC, ReactElement } from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+const useStyles = createStyles((theme) => ({
+  footer: {
+    marginTop: rem(120),
+    borderTop: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+    }`,
+  },
 
-export const Footer: FC = (): ReactElement => {
-  return (
-    <Box component="div"
-      sx={{
-        width: "100%",
-        height: "auto",
-        backgroundColor: "secondary.main",
-        paddingTop: "1rem",
-        paddingBottom: "1rem",
-      }}
+  inner: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingTop: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
+
+    [theme.fn.smallerThan("xs")]: {
+      flexDirection: "column",
+    },
+  },
+
+  links: {
+    [theme.fn.smallerThan("xs")]: {
+      marginTop: theme.spacing.md,
+    },
+  },
+}));
+
+export function Footer() {
+  const { classes } = useStyles();
+
+  const links = [
+    { link: "/games/1", label: "Jeux 1" },
+    { link: "/games/2", label: "Jeux 2" },
+    { link: "/stats", label: "Statistique du site" },
+    { link: "/contact", label: "Contact" },
+  ];
+
+  const items = links.map((link) => (
+    <Anchor<"a">
+      color="dimmed"
+      key={link.label}
+      href={link.link}
+      onClick={(event) => event.preventDefault()}
+      size="sm"
     >
-      <Container maxWidth="lg">
-        <Grid container direction="column" alignItems="center">
-          <Grid item xs={12}>
-            <Typography color="black" variant="h5">
-              Game React App
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography color="textSecondary" variant="subtitle1">
-              {`${new Date().getFullYear()} | React | Material UI | React Router`}
-            </Typography>
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
-  );
-};
+      {link.label}
+    </Anchor>
+  ));
 
-export default Footer;
+  return (
+    <div className={classes.footer}>
+      <Container className={classes.inner}>
+        <img
+          src={require("../assets/logo.png")}
+          alt="logo"
+          style={{
+            maxWidth: "100px",
+            maxHeight: "100px",
+            width: "100%",
+            height: "100%",
+          }}
+        />
+        <Group className={classes.links}>{items}</Group>
+      </Container>
+    </div>
+  );
+}

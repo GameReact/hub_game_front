@@ -11,6 +11,8 @@ import { UserContext } from "./context/UserContextProvider";
 
 import TicTacToe from "./pages/tic_tac_toe/TicTacToe";
 import { HeaderAction } from "./components/Header";
+import { Contact } from "./pages/contact/Contact";
+import { NotFoundTitle } from "./pages/error/Error";
 
 const router = createBrowserRouter([
   {
@@ -59,12 +61,21 @@ function App() {
         element: <About />,
       },
       {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
         path: "/stats",
         element: <Stats />,
       },
       {
         path: "/games/1",
         element: <TicTacToe />,
+      },
+      // ERROR Page
+      {
+        path: "*",
+        element: <NotFoundTitle />,
       },
     ]);
   } else {
