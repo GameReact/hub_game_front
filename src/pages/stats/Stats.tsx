@@ -13,6 +13,7 @@ import faker from "faker";
 import { Bar, Line } from "react-chartjs-2";
 import { HeaderAction } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { createStyles, Title as MantineTitle, rem, Text } from "@mantine/core";
 
 ChartJS.register(
   CategoryScale,
@@ -99,12 +100,39 @@ export const data2 = {
   ],
 };
 
+const useStyles = createStyles((theme) => ({
+  title: {
+    textAlign: "center",
+    fontWeight: 800,
+    fontSize: rem(40),
+    letterSpacing: -1,
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    marginBottom: theme.spacing.xs,
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+
+    [theme.fn.smallerThan("xs")]: {
+      fontSize: rem(28),
+      textAlign: "left",
+    },
+  },
+
+  highlight: {
+    color: theme.colors.orange[5],
+  },
+}));
+
 const Stats: React.FunctionComponent = () => {
+  const { classes } = useStyles();
   return (
     <>
       <HeaderAction />
       <Container maxWidth="md">
-        <Typography variant="h2">Statistique Game Hub</Typography>
+        <MantineTitle className={classes.title}>
+          Statistique du site Game
+          <Text component="span" className={classes.highlight} inherit>
+            Hub
+          </Text>{" "}
+        </MantineTitle>
         <Bar options={options1} data={data1} />
         <Line options={options2} data={data2} />;
       </Container>
