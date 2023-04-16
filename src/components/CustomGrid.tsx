@@ -9,7 +9,7 @@ import preview2 from "../assets/game2/preview.jpg";
 const CustomGrid = () => {
   const games = [
     {
-      name: "Distance entre des villes pays ?",
+      name: "Worldle",
       imageUrl: preview1,
     },
     { name: "Morpion", imageUrl: preview2 },
