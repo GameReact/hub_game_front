@@ -169,7 +169,7 @@ const ConfirmRegister: React.FC<Params> = ({
   return (
     <Container>
       <form>
-        <Box
+        <Box component="div"
           sx={{
             margin: "auto",
             width: 500,

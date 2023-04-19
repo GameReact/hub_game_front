@@ -1,144 +1,161 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  createStyles,
+  Menu,
+  Center,
+  Header,
+  Container,
+  Group,
+  Button,
+  Burger,
+  rem,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { IconChevronDown } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
-const pages = ["Stats", "About"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const HEADER_HEIGHT = rem(60);
 
-function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+const useStyles = createStyles((theme: any) => ({
+  inner: {
+    height: HEADER_HEIGHT,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  links: {
+    [theme.fn.smallerThan("sm")]: {
+      display: "none",
+    },
+  },
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  burger: {
+    display: "none",
+  },
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  link: {
+    display: "block",
+    lineHeight: 1,
+    padding: `${rem(12)} ${rem(18)}`,
+    borderRadius: theme.radius.sm,
+    textDecoration: "none",
+    fontSize: theme.fontSizes.sm,
+    fontWeight: 500,
+
+    "&:hover": {
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
+    },
+  },
+
+  linkLabel: {
+    marginRight: rem(5),
+  },
+}));
+
+export function HeaderAction() {
+  const links = [
+    {
+      link: "/",
+      label: "Accueil",
+    },
+    {
+      link: "",
+      label: "Jeux",
+      links: [
+        {
+          link: "/games/1",
+          label: "TicTacToe",
+        },
+        {
+          link: "/games/2",
+          label: "Distance entre des villes pays ?",
+        },
+      ],
+    },
+    {
+      link: "/about",
+      label: "A propos",
+    },
+    {
+      link: "/stats",
+      label: "Statistique",
+    },
+    {
+      link: "/profil",
+      label: "Profil",
+    },
+    {
+      link: "/contact",
+      label: "Contact",
+    },
+  ];
+
+  const { classes } = useStyles();
+  const [opened, { toggle }] = useDisclosure(false);
+  const items = links.map((link) => {
+    const menuItems = link.links?.map((item) => (
+      <Link to={item.link} className={classes.link}>
+        <Menu.Item key={item.link}>{item.label}</Menu.Item>
+      </Link>
+    ));
+
+    if (menuItems) {
+      return (
+        <Menu
+          key={link.label}
+          trigger="hover"
+          transitionProps={{ exitDuration: 0 }}
+          withinPortal
+        >
+          <Menu.Target>
+            <Link to={link.link} className={classes.link}>
+              <Center>
+                <span className={classes.linkLabel}>{link.label}</span>
+                <IconChevronDown size={rem(12)} stroke={1.5} />
+              </Center>
+            </Link>
+          </Menu.Target>
+          <Menu.Dropdown>{menuItems}</Menu.Dropdown>
+        </Menu>
+      );
+    }
+
+    return (
+      <Link key={link.label} to={link.link} className={classes.link}>
+        {link.label}
+      </Link>
+    );
+  });
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Link to="/">
-            <img
-              src={require("../assets/logo.png")}
-              alt="logo"
-              style={{
-                maxWidth: "100px",
-                maxHeight: "100px",
-                width: "100%",
-                height: "100%",
-              }}
-            />
-          </Link>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link to={"/" + page}>
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
-              </Link>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
+    <Header height={HEADER_HEIGHT} sx={{ borderBottom: 0 }} mb={120}>
+      <Container className={classes.inner} fluid>
+        <Group>
+          <Burger
+            opened={opened}
+            onClick={toggle}
+            className={classes.burger}
+            size="sm"
+          />
+          <img
+            src={require("../assets/logo.png")}
+            alt="logo"
+            style={{
+              maxWidth: "100px",
+              maxHeight: "100px",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </Group>
+        <Group className={classes.links}>{items}</Group>
+        <Button radius="xl" h={30}>
+          Se déconnecter
+        </Button>
       </Container>
-    </AppBar>
+    </Header>
   );
 }
-export default Header;

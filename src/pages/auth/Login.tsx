@@ -15,21 +15,27 @@ import {
   Box,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUserInformation } from "../../store/slices/UserSlice";
+import { UserSliceState } from "../../store/slices/UserSlice";
 import jwt_decode, { JwtPayload } from "jwt-decode";
 import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
 import useAxios from "../../hooks/useAxios";
+import { UserContext } from "../../context/UserContextProvider";
 
 interface Params {
   openSnackbar: (text: string, color: AlertColor) => void;
 }
 
 const Login: React.FC<Params> = ({ openSnackbar }) => {
-  const dispatch = useDispatch();
+  const { state, dispatch } = useContext(UserContext);
+
+  const updateUser = (newUserState: UserSliceState) => {
+    dispatch({ type: "setUser", payload: newUserState });
+  };
+
+  // const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -94,16 +100,15 @@ const Login: React.FC<Params> = ({ openSnackbar }) => {
     })
       .then((response) => {
         const config = jwt_decode(token) as JwtPayload;
-        dispatch(
-          setUserInformation({
-            token: token,
-            tokenPayload: config,
-            id: response!.data.content[0].id,
-            email: response!.data.content[0].email,
-            firstname: response!.data.content[0].firstname,
-            lastname: response!.data.content[0].lastname,
-          })
-        );
+        const newUserState = {
+          token: token,
+          tokenPayload: config,
+          id: response!.data.content[0].id,
+          email: response!.data.content[0].email,
+          firstname: response!.data.content[0].firstname,
+          lastname: response!.data.content[0].lastname,
+        };
+        updateUser(newUserState);
         openSnackbar("Connexion réussie !", "success");
         navigate("/");
       })
@@ -185,7 +190,7 @@ const Login: React.FC<Params> = ({ openSnackbar }) => {
 
   return (
     <form>
-      <Box
+      <Box component="div"
         sx={{
           margin: "auto",
           width: 500,

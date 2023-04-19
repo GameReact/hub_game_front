@@ -60,7 +60,7 @@ const WorldleGame = () => {
                 <img
                     width={250} height={250}
                     alt="country to guess"
-                    src={`images/countries/${country.code.toLowerCase()}/vector.svg`}
+                    src={`/images/countries/${countryToGuess.code.toLowerCase()}/vector.svg`}
                 />
             </div>
             <Guesses
