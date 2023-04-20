@@ -41,14 +41,12 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
     // Store all uuid of new mesh created
     const [playerMesh, setPlayerMesh] = useState<string[]>([])
     const [aPlayerWin, setAPlayerWin] = useState<boolean>(false)
+    const [gameEnd, setGameEnd] = useState<boolean>(false)
 
     useEffect(() => {
         if (!init) {
             setInit(true)
             createBoard()
-            // resetVariable()
-            // createCross(0, 0, 0)
-            // createWinningLine(cubePosition, 0, 0, TYPE_LINE.VERTICAL)
         }
     })
 
@@ -65,7 +63,6 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
      * @param z :: position
      */
     function createCylinder(x: number, y: number, z: number): void {
-        console.log('create Cylinder')
         const geometry = new CylinderGeometry(0.7, 0.7, 0.3);
         const material = new MeshBasicMaterial({color: color});
         const cylinder = new Mesh(geometry, material);
@@ -87,7 +84,6 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
      * @param z :: position
      */
     function createCross(x: number, y: number, z: number): void {
-        console.log('create Cross')
         // A cross is composed of two line (two box geometry)
         // First line
         const geometry = new BoxGeometry(1.5, 0.3, 0.3);
@@ -185,21 +181,22 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
      */
     function playerAction(position: Vector3): void {
         if (!position) {
-            console.error('position not provided')
             return
         }
         if (player.valueOf() === PLAYER.PLAYER_1.valueOf()) {
-            console.log('player 1 action')
             createCross(position.x, position.y, position.z)
             savePlayerAction(position, PLAYER.PLAYER_1)
             const player1Win = aPLayerWin(PLAYER.PLAYER_1)
             if (player1Win) {
                 setAPlayerWin(true)
             } else {
-                setPLayer(PLAYER.PLAYER_2)
+                if (checkGameEnd()) {
+                    setGameEnd(true)
+                } else {
+                    setPLayer(PLAYER.PLAYER_2)
+                }
             }
         } else if (player.valueOf() === PLAYER.PLAYER_2.valueOf()) {
-            console.log('player 2 action')
             createCylinder(position.x, position.y, position.z)
             savePlayerAction(position, PLAYER.PLAYER_2)
             const player2Win = aPLayerWin(PLAYER.PLAYER_2)
@@ -217,7 +214,6 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
      */
     function aPLayerWin(player: PLAYER): boolean {
         // Check vertical and horizontal win
-        console.log('check horizontal and vertical win')
         for (let i = 0; i < 3; i++) {
             let horizontalWin = true
             let verticalWin = true
@@ -234,9 +230,6 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
                 }
             }
             if (horizontalWin || verticalWin) {
-                console.log('horizontal Win ', horizontalWin)
-                console.log('vertical win', verticalWin)
-                console.log('player win ,', player)
                 if (verticalWin) {
                     createWinningLine(cubePosition * (i - 1), 0, 0, TYPE_LINE.VERTICAL)
                 }
@@ -249,7 +242,6 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
         // Check diagonals win
         let diagonals1Win = true
         let diagonals2Win = true
-        console.log('Check diagonals wins')
         for (let i = 0; i < 3; i++) {
             if (game[i][i] !== player.valueOf()) {
                 diagonals1Win = false
@@ -259,9 +251,6 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
             }
         }
         if (diagonals1Win || diagonals2Win) {
-            console.log('diagonals 1 ', diagonals1Win)
-            console.log('diagonals 2 ', diagonals2Win)
-            console.log('player win ,', player)
             if (diagonals1Win) {
                 createWinningLine(0, 0, 0, TYPE_LINE.DIAGONAL, Math.PI / 4)
             } else if (diagonals2Win) {
@@ -269,8 +258,22 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
             }
             return true
         }
-        console.log('none player win return false')
         return false
+    }
+
+    function checkGameEnd(): boolean {
+        let gameEnd = true
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (game[i][j] === PLAYER.UNPLAYED.valueOf()) {
+                    gameEnd = false
+                }
+                if (!gameEnd) {
+                    return gameEnd
+                }
+            }
+        }
+        return gameEnd
     }
 
     /**
@@ -295,11 +298,9 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
         } else if (position.x === cubePosition) { // RIGHT
             x = 2
         }
-        console.log('coord : x:' + x + ' y :' + y)
         if (x !== undefined && y !== undefined) {
             game[y][x] = player.valueOf()
         }
-        console.log(game)
     }
 
     //endregion
@@ -309,9 +310,7 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
      * This function will reset the game. This reset all the mesh created by user and all variable
      */
     function resetGame(): void {
-        console.log('enter method reset game ')
         playerMesh.map(uuid => {
-            console.log('uuid : ', uuid)
             const object = state.scene.getObjectByProperty('uuid', uuid)
             if (object) {
                 // First remove all children from the object
@@ -322,7 +321,6 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
                 }
                 // Remove object
                 state.scene.remove(object)
-                console.log('remove the object :', object)
             }
         })
         resetVariable()
@@ -336,6 +334,7 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
             [PLAYER.UNPLAYED, PLAYER.UNPLAYED, PLAYER.UNPLAYED]])
         setPLayer(PLAYER.PLAYER_1)
         setAPlayerWin(false)
+        setGameEnd(false)
     }
 
     //endregion
@@ -465,7 +464,7 @@ const TicTacToeGame: React.FunctionComponent<Params> = ({color}) => {
                         Quitter
                     </Text3D>
                 </Center>
-                {aPlayerWin ?
+                {aPlayerWin || gameEnd ?
                     <Center position={[8, 0, 0]}>
                         <Text3D font="/font/Inter_Bold.json" size={undefined} height={undefined}
                                 bevelEnabled={false} bevelOffset={undefined} bevelSize={undefined}
