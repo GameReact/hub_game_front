@@ -18,11 +18,11 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import React, { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserSliceState } from "../../store/slices/UserSlice";
 import jwt_decode, { JwtPayload } from "jwt-decode";
 import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
 import useAxios from "../../hooks/useAxios";
 import { UserContext } from "../../context/UserContextProvider";
+import { UserSliceState } from "../../interfaces/interfaces";
 
 interface Params {
   openSnackbar: (text: string, color: AlertColor) => void;
@@ -190,7 +190,8 @@ const Login: React.FC<Params> = ({ openSnackbar }) => {
 
   return (
     <form>
-      <Box component="div"
+      <Box
+        component="div"
         sx={{
           margin: "auto",
           width: 500,

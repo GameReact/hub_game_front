@@ -1,14 +1,6 @@
 import { JwtPayload } from "jwt-decode";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface UserSliceState {
-  token: string;
-  tokenPayload: JwtPayload | null;
-  id: number | null;
-  email: string;
-  firstname: string;
-  lastname: string;
-}
+import { UserSliceState } from "../../interfaces/interfaces";
 
 const initialState: UserSliceState = {
   token: "",
