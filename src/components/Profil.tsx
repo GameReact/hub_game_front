@@ -17,6 +17,8 @@ import {
 } from "@tabler/icons-react";
 import { UserContext } from "../context/UserContextProvider";
 import { useContext } from "react";
+import { UserSliceState } from "../interfaces/interfaces";
+import useAxios from "../hooks/useAxios";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -90,8 +92,41 @@ const useStyles = createStyles((theme) => ({
 const social = [IconBrandTwitter, IconBrandYoutube, IconBrandInstagram];
 
 export function ProfilC() {
+  const { fetchData } = useAxios();
+
   const { classes } = useStyles();
-  const { state: user } = useContext(UserContext);
+  const { state: user, dispatch } = useContext(UserContext);
+
+  const updateUser = (newUserState: UserSliceState) => {
+    dispatch({ type: "setUser", payload: newUserState });
+  };
+
+  const updateProfile = () => {
+    user.firstname = (document.getElementById('prenom') as HTMLInputElement).value;
+    user.lastname = (document.getElementById('nom') as HTMLInputElement).value;
+
+    fetchData({
+      method: "PUT",
+      url: `/users/ ${user.id}`,
+      headers: {
+        accept: "*/*",
+        Authorization: "Bearer " + user.token,
+      },
+      data: {
+        id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email
+      }
+    })
+      .then((response) => {
+        console.log(response)
+        updateUser(user)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const icons = social.map((Icon, index) => (
     <ActionIcon
@@ -124,34 +159,25 @@ export function ProfilC() {
         </div>
         <div className={classes.form}>
           <Title className={classes.title2}>Éditer mon profil</Title>
-          <TextInput
-            label="Email"
-            placeholder="your@email.com"
-            required
-            classNames={{ input: classes.input, label: classes.inputLabel }}
-          />
+
           <TextInput
             label="Prénom"
             placeholder="Jack"
             mt="md"
+            id="prenom"
             classNames={{ input: classes.input, label: classes.inputLabel }}
           />
           <TextInput
             label="Nom"
             placeholder="Sparrow"
             mt="md"
+            id="nom"
             classNames={{ input: classes.input, label: classes.inputLabel }}
           />
 
-          <TextInput
-            label="Métier"
-            placeholder="Marin pécheur"
-            mt="md"
-            classNames={{ input: classes.input, label: classes.inputLabel }}
-          />
 
           <Group position="right" mt="md">
-            <Button className={classes.control}>Modifier mon profil</Button>
+            <Button className={classes.control} onClick={() => updateProfile()}>Modifier mon profil</Button>
           </Group>
         </div>
       </SimpleGrid>
