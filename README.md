@@ -32,6 +32,10 @@ Frontend GameHub, est un site web qui répertorie nos jeux vidéos.
 
 Il est développé en ReactJS.
 
+Il possède pour le moment de 2 jeux : Le jeux de morpion et le jeux du pays
+
+![Presentation](./src/assets/presentation.png)
+
 ## Installation
 
 - Télécharger NodeJs
