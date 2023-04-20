@@ -32,8 +32,8 @@ export function Footer() {
   const { classes } = useStyles();
 
   const links = [
-    { link: "/games/1", label: "Jeux 1" },
-    { link: "/games/2", label: "Jeux 2" },
+    { link: "/games/tictactoe", label: "Jeux Tic Tac Toe" },
+    { link: "/games/worldle", label: "Jeux Worldle" },
     { link: "/stats", label: "Statistique du site" },
     { link: "/contact", label: "Contact" },
   ];
