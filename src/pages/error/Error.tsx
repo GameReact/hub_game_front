@@ -56,20 +56,22 @@ export function NotFoundTitle() {
   return (
     <Container className={classes.root}>
       <div className={classes.label}>404</div>
-      <Title className={classes.title}>You have found a secret place.</Title>
+      <Title className={classes.title}>
+        Vous avez trouvé un endroit secret.
+      </Title>
       <Text
         color="dimmed"
         size="lg"
         align="center"
         className={classes.description}
       >
-        Unfortunately, this is only a 404 page. You may have mistyped the
-        address, or the page has been moved to another URL.
+        Malheureusement, il ne s'agit que d'une page 404. Vous avez peut-être
+        mal saisi l'adresse ou la page a été déplacée vers une autre URL.
       </Text>
       <Group position="center">
         <Link to="/">
           <Button variant="subtle" size="md">
-            Take me back to home page
+            Me ramener à la page d'accueil
           </Button>
         </Link>
       </Group>
