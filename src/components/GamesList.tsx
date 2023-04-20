@@ -13,10 +13,10 @@ import preview2 from "../assets/game2/preview.jpg";
 
 const mockdata = [
   {
-    title: "Jeux du morpion",
+    title: "Tic Tac Toe",
     image: preview1,
     creator: "Par Bastien",
-    link: "/games/1",
+    link: "/games/tictactoe",
   },
   {
     title: "Worldle",

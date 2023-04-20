@@ -66,12 +66,12 @@ export function HeaderAction() {
       label: "Jeux",
       links: [
         {
-          link: "/games/1",
+          link: "/games/tictactoe",
           label: "TicTacToe",
         },
         {
-          link: "/games/2",
-          label: "Distance entre des villes pays ?",
+          link: "/games/worldle",
+          label: "Worldle, devine le pays",
         },
       ],
     },

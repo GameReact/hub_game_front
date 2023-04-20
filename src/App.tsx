@@ -13,7 +13,7 @@ import TicTacToe from "./pages/tic_tac_toe/TicTacToe";
 import { HeaderAction } from "./components/Header";
 import { Contact } from "./pages/contact/Contact";
 import { NotFoundTitle } from "./pages/error/Error";
-import Worldle from "./pages/worldle/Worldle"
+import Worldle from "./pages/worldle/Worldle";
 
 const router = createBrowserRouter([
   {
@@ -74,7 +74,7 @@ function App() {
         element: <Stats />,
       },
       {
-        path: "/games/1",
+        path: "/games/tictactoe",
         element: <TicTacToe />,
       },
       {
