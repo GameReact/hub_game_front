@@ -19,26 +19,18 @@
 </p>
 <p align="center">
   <a href="#présentation">Présentation</a> •
-  <a href="#assurance-de-la-qualité-du-code">Qualité du code</a> •
   <a href="#installation">Installation</a> •
+  <a href="#libraires-utilisées">Libraires utilisées</a> •
+  <a href="#assurance-de-la-qualité-du-code">Qualité du code</a> •
   <a href="#plugins-conseillés">Plugins conseillés</a> •
-  <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
 
 ## Présentation
 
-Frontend GameHub, est un site web qui répertorie nos jeux vidéos. Il est développé en ReactJS.
+Frontend GameHub, est un site web qui répertorie nos jeux vidéos.
 
-## Assurance de la qualité du code
-
-Des mesures ont été recommandées pour assurer la qualité optimale du code et faciliter son maintien. Celles-ci incluent :
-
-- Ajout de commentaires clairs et concis au code, ce qui aidera les développeurs à comprendre son fonctionnement et à le maintenir en cas de besoin.
-
-- Utilisation d'un Linter comme Eslint pour vérifier la qualité du code et l'adapter aux standards de codage, ce qui permettra de corriger les erreurs de syntaxe et de formatage et d'améliorer la qualité du code.
-
-- Formatage du code avec Prettier pour le rendre plus lisible, ce qui aidera les développeurs à comprendre et à maintenir le code plus facilement.
+Il est développé en ReactJS.
 
 ## Installation
 
@@ -63,6 +55,15 @@ npm install
 npm start
 ```
 
+## Libraires utilisées
+
+- Three JS : Pour la 3D
+- React Router : Pour la navigation
+- Material UI : Pour les composants
+- Mantine : Pour l'UI des composants
+- ChartJS : Pour les graphiques
+- Axios : Pour les requêtes HTTP
+
 ## Arborescence choisis
 
 - Assets : ce dossier contient les fichiers statiques tels que les images, les polices et les fichiers de configuration.
@@ -80,6 +81,16 @@ npm start
 - Styles : ce dossier contient les fichiers de style globaux tels que les fichiers CSS ou SCSS.
 
 - Theme : ce dossier contient les fichiers de configuration pour le thème de l'application tels que les couleurs, les polices et les styles.
+
+## Assurance de la qualité du code
+
+Des mesures ont été recommandées pour assurer la qualité optimale du code et faciliter son maintien. Celles-ci incluent :
+
+- Ajout de commentaires clairs et concis au code, ce qui aidera les développeurs à comprendre son fonctionnement et à le maintenir en cas de besoin.
+
+- Utilisation d'un Linter comme Eslint pour vérifier la qualité du code et l'adapter aux standards de codage, ce qui permettra de corriger les erreurs de syntaxe et de formatage et d'améliorer la qualité du code.
+
+- Formatage du code avec Prettier pour le rendre plus lisible, ce qui aidera les développeurs à comprendre et à maintenir le code plus facilement.
 
 ## Plugins conseillés
 
