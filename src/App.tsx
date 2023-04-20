@@ -14,6 +14,7 @@ import { HeaderAction } from "./components/Header";
 import { Contact } from "./pages/contact/Contact";
 import { NotFoundTitle } from "./pages/error/Error";
 import Worldle from "./pages/worldle/Worldle";
+import Profil from "./pages/profil/Profil";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ function App() {
       {
         path: "/stats",
         element: <Stats />,
+      },
+      {
+        path: "/profil",
+        element: <Profil />,
       },
       {
         path: "/games/tictactoe",

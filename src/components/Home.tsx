@@ -106,7 +106,8 @@ export function HeroText() {
     <Container className={classes.wrapper} size={1400}>
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Bienvenue {user.firstname} sur notre merveilleux site Game
+          Bienvenue {user.firstname} {user.lastname} sur notre merveilleux site
+          Game
           <Text component="span" className={classes.highlight} inherit>
             Hub
           </Text>{" "}
