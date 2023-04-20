@@ -51,6 +51,10 @@ function App() {
       path: "/",
       element: <Authpage />,
     },
+    {
+      path: "*",
+      element: <NotFoundTitle />,
+    },
   ]);
   if (state.token) {
     router = createBrowserRouter([
