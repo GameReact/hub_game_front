@@ -8,17 +8,13 @@ import {
 import CountryInput from "./CountryInput";
 import * as geolib from "geolib";
 import Guesses from "./Guesses";
-import {Guess} from "./data/Guess";
+import { Guess } from "./data/Guess";
 
 const MAX_TRY_COUNT = 5;
 
-const guesses: Guess[] = []
-
-const countryToGuess = getRandomCountry()
-
 const WorldleGame = () => {
-    const country = countryToGuess
-
+    const [guesses, setGuesses] = useState<Guess[]>([]);
+    const [countryToGuess, setCountryToGuess] = useState(getRandomCountry());
     const [currentGuess, setCurrentGuess] = useState("");
 
     const gameEnded =
@@ -41,36 +37,36 @@ const WorldleGame = () => {
 
             const newGuess = {
                 name: currentGuess,
-                distance: geolib.getDistance(guessedCountry, country),
-                direction: geolib.getCompassDirection(guessedCountry, country),
+                distance: geolib.getDistance(guessedCountry, countryToGuess),
+                direction: geolib.getCompassDirection(guessedCountry, countryToGuess),
             };
 
-            guesses.push(newGuess)
+            setGuesses((prevGuesses) => [...prevGuesses, newGuess]);
             setCurrentGuess("");
-
-            console.log(countryToGuess.name)
         },
-        [country, currentGuess]
-
+        [currentGuess]
     );
+
+    const resetGame = () => {
+        setGuesses([]);
+        setCountryToGuess(getRandomCountry());
+    };
 
     return (
         <div>
             <div>
                 <img
-                    width={250} height={250}
+                    width={250}
+                    height={250}
                     alt="country to guess"
                     src={`/images/countries/${countryToGuess.code.toLowerCase()}/vector.svg`}
                 />
             </div>
-            <Guesses
-                rowCount={MAX_TRY_COUNT}
-                guesses={guesses}
-            />
+            <Guesses rowCount={MAX_TRY_COUNT} guesses={guesses} />
             <div className="my-2">
                 {gameEnded ? (
                     <>
-                        {guesses.at(guesses.length-1)?.distance === 0 ? (
+                        {guesses.at(guesses.length - 1)?.distance === 0 ? (
                             <>
                                 <p>Excellent vous avez gagné !</p>
                             </>
@@ -80,7 +76,7 @@ const WorldleGame = () => {
                             </>
                         )}
 
-                        <button onClick={() => window.location.reload()}>Recommencer</button>
+                        <button onClick={resetGame}>Recommencer</button>
                     </>
                 ) : (
                     <form onSubmit={handleSubmit}>
@@ -89,15 +85,13 @@ const WorldleGame = () => {
                                 currentGuess={currentGuess}
                                 setCurrentGuess={setCurrentGuess}
                             />
-                            <button type="submit">
-                                🌍 {"Devinez"}
-                            </button>
+                            <button type="submit">🌍 {"Devinez"}</button>
                         </div>
                     </form>
                 )}
             </div>
         </div>
     );
-}
+};
 
 export default WorldleGame;
